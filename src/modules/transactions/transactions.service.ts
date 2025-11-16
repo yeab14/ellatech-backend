@@ -12,7 +12,7 @@ export class TransactionsService {
 
   async findAll(): Promise<Transaction[]> {
     return this.transactionsRepository.find({
-      relations: ['user', 'product'],
+      relations: ['product'],
       order: { createdAt: 'DESC' },
     });
   }
