@@ -1,8 +1,6 @@
-version: '3.9'
-
 services:
   postgres:
-    image: postgres:18
+    image: postgres:17
     container_name: ellatech-postgres
     restart: unless-stopped
     environment:
@@ -12,7 +10,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - postgres-data:/var/lib/postgresql
+      - postgres-data:/var/lib/postgresql/data
 
   api:
     build:
@@ -27,11 +25,11 @@ services:
       DATABASE_PASSWORD: postgres
       DATABASE_NAME: ellatech
     ports:
-      - '3001:3000'
+      - '3000:3000'
     depends_on:
       - postgres
     command: >
-      sh -c "npm install && npm run migration:run && npm run start:dev"
+      sh -c "./wait-for-postgres.sh $DATABASE_HOST && npm run migration:run && npm run start:dev"
 
 volumes:
   postgres-data:

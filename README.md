@@ -1,79 +1,113 @@
 Ellatech Backend Service
+
 Overview
+
 This project is a small backend service built with NestJS, PostgreSQL, and TypeORM. It manages users, products, and transaction history, fulfilling the requirements of the Ellatech take-home exercise.
 
 The service exposes the following RESTful API endpoints:
+```
+➤ POST /users - Create a new user
 
-POST /users - Create a new user
+➤ POST /products - Create a new product
 
-POST /products - Create a new product
+➤ PUT /products/adjust - Adjust product details/quantity
 
-PUT /products/adjust - Adjust product details/quantity
+➤ GET /status/:productId - Get status of a product by ID
 
-GET /status/:productId - Get status of a product by ID
-
-GET /transactions - List all transactions
+➤ GET /transactions - List all transactions
+```
 
 Technology Stack
-Node.js 20 (Alpine)
+```
+➤ Node.js 20 (Alpine)
 
-NestJS framework
+➤ NestJS framework
 
-TypeORM ORM
+➤ TypeORM ORM
 
-PostgreSQL database inside a Docker container
+➤ PostgreSQL database inside a Docker container
 
-Docker and Docker Compose for local environment orchestration
+➤ Docker and Docker Compose for local environment orchestration
+```
 
 Getting Started
-Prerequisites
-Docker and Docker Compose installed on your machine
 
+Prerequisites
+```
+Docker and Docker Compose installed on your machine
+```
 Running Locally with Docker Compose
+
 Clone the repository:
 
-bash
+```
 git clone (https://github.com/yeab14/ellatech-backend.git)
+```
+```
 cd ellatech-backend
+```
+
 Build and start the API and PostgreSQL DB containers:
 
-bash
+```
 docker-compose up --build
+```
 This command will:
 
-Start a PostgreSQL container with the database ellatech
+➤ Start a PostgreSQL container with the database ellatech
 
-Build and start the NestJS API container
+➤ Build and start the NestJS API container
 
+```
 Run npm install, TypeORM migrations, and launch the API in development mode
+```
 
 The API will be accessible at:
-http://localhost:3001
+```
+http://localhost:3000
+```
 
 API Documentation
+
 Create User
 Endpoint: POST /users
 
 Body:
-
+```
 json
 {
   "email": "user@example.com",
   "name": "User Name"
 }
+```
 Response: Newly created user object with id, createdAt and updatedAt.
 
 Create Product
 Endpoint: POST /products
 
-Body: (as per product DTO)
+Body:
+```
+json
+{
+  "name": "iphone 14",
+  "description": "iphone 14 with 128 GB",
+  "quantity": 10
+}
+```
 
 Response: Created product object.
 
 Adjust Product
 Endpoint: PUT /products/adjust
 
-Body: (adjustment details)
+Body: 
+```
+json
+{
+  "productId": "aa388e82-7a3f-4995-a644-6af30ec45a5c",
+  "adjustment": 15
+}
+```
 
 Get Product Status
 Endpoint: GET /status/:productId
@@ -86,12 +120,13 @@ Endpoint: GET /transactions
 Response: Array of recorded transactions.
 
 Notes and Assumptions
-Validation is applied at DTO level using class-validator decorators.
 
-TypeORM migrations are included and run on container startup.
+➤ Validation is applied at DTO level using class-validator decorators.
 
-The service uses Docker Compose for easy local environment setup.
+➤ TypeORM migrations are included and run on container startup.
 
-API runs on port 3001 mapped to container's 3000.
+➤ The service uses Docker Compose for easy local environment setup.
 
-PostgreSQL runs on default port 5432 within Docker.
+➤ API runs on port 3000 mapped to container's 3000.
+
+➤ PostgreSQL runs on default port 5432 within Docker.
