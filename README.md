@@ -76,11 +76,21 @@ Body:
 ```
 json
 {
-  "email": "user@example.com",
-  "name": "User Name"
+"email": "yeab149@gmail.com",
+"name": "yeab",
 }
 ```
 Response: Newly created user object with id, createdAt and updatedAt.
+
+```
+{
+    "id": "43794156-b38c-4b40-8e0b-dc997660c3be",
+    "email": "yeab149@gmail.com",
+    "name": "yeab",
+    "createdAt": "2025-11-16T17:07:01.330Z",
+    "updatedAt": "2025-11-16T17:07:01.330Z"
+}
+```
 
 Create Product
 Endpoint: POST /products
@@ -96,6 +106,16 @@ json
 ```
 
 Response: Created product object.
+```
+{
+    "id": "f677edc3-35a7-490d-9fdb-7c9e2b2d950f",
+    "name": "iphone 14",
+    "description": "iphone 14 with 128 GB",
+    "quantity": 10,
+    "createdAt": "2025-11-16T17:09:09.690Z",
+    "updatedAt": "2025-11-16T17:09:09.690Z"
+}
+```
 
 Adjust Product
 Endpoint: PUT /products/adjust
@@ -103,20 +123,64 @@ Endpoint: PUT /products/adjust
 Body: 
 ```
 json
-{
-  "productId": "aa388e82-7a3f-4995-a644-6af30ec45a5c",
+ {
+  "productId": "f677edc3-35a7-490d-9fdb-7c9e2b2d950f",
   "adjustment": 15
 }
 ```
+Response: Updated product object.
 
+```
+{
+    "id": "f677edc3-35a7-490d-9fdb-7c9e2b2d950f",
+    "name": "iphone 14",
+    "description": "iphone 14 with 128 GB",
+    "quantity": 25,
+    "createdAt": "2025-11-16T17:09:09.690Z",
+    "updatedAt": "2025-11-16T17:10:34.659Z"
+}
+```
 Get Product Status
 Endpoint: GET /status/:productId
 
+Example: http://localhost:3000/products/status/f677edc3-35a7-490d-9fdb-7c9e2b2d950f
+
 Response: Current status of product.
 
+```
+{
+    "id": "f677edc3-35a7-490d-9fdb-7c9e2b2d950f",
+    "name": "iphone 14",
+    "description": "iphone 14 with 128 GB",
+    "quantity": 25,
+    "createdAt": "2025-11-16T17:09:09.690Z",
+    "updatedAt": "2025-11-16T17:10:34.659Z"
+}
+```
+
 List Transactions
+
 Endpoint: GET /transactions
 
+Example: http://localhost:3000/transactions
+
+```
+[
+    {
+        "id": "41ab289b-c577-470c-8610-a8e44dcd449a",
+        "product": {
+            "id": "f677edc3-35a7-490d-9fdb-7c9e2b2d950f",
+            "name": "iphone 14",
+            "description": "iphone 14 with 128 GB",
+            "quantity": 25,
+            "createdAt": "2025-11-16T17:09:09.690Z",
+            "updatedAt": "2025-11-16T17:10:34.659Z"
+        },
+        "quantityChanged": 15,
+        "createdAt": "2025-11-16T17:10:34.659Z"
+    }
+]
+```
 Response: Array of recorded transactions.
 
 Notes and Assumptions
